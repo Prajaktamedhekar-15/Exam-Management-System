@@ -12,6 +12,12 @@ app.use(express.static('public'));
 app.use(express.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
+app.use(session({
+    secret:"111111111fdf",
+    resave:false,
+    saveUninitialized:false
+}));
+
 app.set('view engine',"ejs");
 
 
