@@ -1,17 +1,19 @@
-let mysql = require("mysql2");
-let conn = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "Nikita2608",
-    database: "examapp"
+const mysql = require("mysql2");
+const dotenv = require("dotenv");
+dotenv.config(); // Load .env variables into process.env
+
+const conn = mysql.createConnection({
+    host: process.env.host,
+    user: process.env.user,
+    password: process.env.password,
+    database: process.env.database
 });
 
 conn.connect((err) => {
     if (err) {
-        console.log("database is failed..!!");
-    }
-    else {
-        console.log("database is connected..!!");
+        console.log("Database connection failed");
+    } else {
+        console.log("Database is connected..!!");
     }
 });
 
