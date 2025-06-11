@@ -8,7 +8,11 @@ let conn = mysql.createConnection({
 
 conn.connect((err) => {
     if (err) {
+
         console.log("database is failed..!!");
+
+        
+
     }
     else {
         console.log("database is connected..!!");
