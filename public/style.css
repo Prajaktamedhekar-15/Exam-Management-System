@@ -1,0 +1,327 @@
+
+/* Background style */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  height: 100%;
+}
+
+.background {
+  background: linear-gradient(to right, #74ebd5, #ACB6E5);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Card Style */
+.login-box {
+  background: white;
+  padding: 40px 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 320px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.login-box h1 {
+  margin-bottom: 10px;
+  font-size: 24px;
+  color: #333;
+}
+
+.login-box p {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 25px;
+}
+
+/* Button styles */
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.btn {
+  padding: 12px 20px;
+  text-decoration: none;
+  background-color: #1e90ff;
+  color: white;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 10px rgba(30, 144, 255, 0.2);
+}
+
+.btn:hover {
+  background-color: #1c7ed6;
+}
+
+/* Smooth fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/*---------------------admin css--------------------*/
+
+.admin-login-page {
+    height: 100vh;
+    background: linear-gradient(to right, #74ebd5, #acb6e5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Target only inside .admin-login-page */
+.admin-login-page .acontainer {
+    background: #fff;
+    padding: 30px 40px;
+    border-radius: 15px;
+    width: 320px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.7s ease;
+}
+
+.admin-login-page .ad {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 22px;
+    color: #333;
+}
+
+.admin-login-page label {
+    display: block;
+    margin: 10px 0 5px;
+    font-size: 14px;
+    color: #555;
+}
+
+.admin-login-page .control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.admin-login-page .control:focus {
+    border-color: #1e90ff;
+}
+
+.admin-login-page .submit-btn {
+    margin-top: 20px;
+    background-color: #1e90ff;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 10px rgba(30, 144, 255, 0.2);
+}
+
+.admin-login-page .submit-btn:hover {
+    background-color: #187bcd;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/*-----------------------------dashboard-------------------------------------*/
+.D_container{
+    
+    width:100%;
+   
+
+}
+
+
+.D_nav {
+    width: 100%;
+    background: linear-gradient(to right, #1e3c72, #2a5298); /* nice blue gradient */
+    padding: 20px 40px;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Flex Container */
+.D_flex {
+    display: flex;
+    gap: 20px; /* space between children */
+    padding: 20px;
+}
+
+/* Sidebar */
+.side1 {
+    width: 20%;
+    height:400px;
+    background-color: #f0f4f8;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.side1 ul a{
+    text-decoration: none;
+    line-height: 30px;
+} 
+/* Main Content */
+.side2 {
+    flex: 1;
+    background-color: #1e1e1e;
+    color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/*----------------------------------------------------------course form-------------------------------------------------------------------*/
+
+.course-form-container {
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 450px;
+  height: 300px;
+}
+
+.course-form-container h2 {
+  margin-bottom: 15px;
+  color: #d62828; /* red heading */
+  font-size: 22px;
+}
+
+.course-form-container label {
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+  font-size: 14px;
+}
+
+.course-form-container input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.course-form-container button {
+  width: 100%;
+  padding: 10px;
+  background-color: #ffc107;
+  /*yellow*/border: none;
+  border-radius: 5px;
+  color: #000;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  -webkit-transition: background-color 0.3s ease;
+  -moz-transition: background-color 0.3s ease;
+  -ms-transition: background-color 0.3s ease;
+  -o-transition: background-color 0.3s ease;
+}
+
+.course-form-container button:hover {
+  background-color: #e0a800;
+}
+
+.toshowCourse{
+  display:flex;
+  width:100%;
+
+}
+.c1{
+  margin-top: 100px;
+  width:50%;
+  position: relative;
+}
+.c2{
+  background-color:white;
+   margin-top: 100px;
+  width:50%;
+  position: relative;
+}
+
+/* ---------------------------------------------------------------- Responsive Design ----------------------------------------------*/
+@media (max-width: 992px) {
+  .D_flex {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .side1 {
+    width: 100%;
+    height: auto;
+  }
+
+  .side2 {
+    width: 100%;
+  }
+
+  .toshowCourse {
+    flex-direction: column;
+  }
+
+  .c1, .c2 {
+    width: 100%;
+    margin-top: 40px;
+  }
+
+  .course-form-container {
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .D_nav {
+    font-size: 1.2rem;
+    padding: 15px 20px;
+    text-align: center;
+  }
+
+  .course-form-container {
+    padding: 20px;
+  }
+
+  .login-box {
+    width: 90%;
+    padding: 30px 20px;
+  }
+
+  .admin-login-page .acontainer {
+    width: 90%;
+    padding: 25px;
+  }
+}

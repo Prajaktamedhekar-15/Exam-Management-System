@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="admin-login-page">
+    <form name="frm" action="/validateAdminData" method="POST">
+      <div class="acontainer">
+        <h4 class="ad">Admin Login</h4>
+
+        <% if (typeof msg !== 'undefined') { %>
+    <p style="color: red; font-size: 14px; text-align: center;"><%= msg %></p>
+  <% } %>
+
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username" placeholder="Enter the username" class="control" required><br>
+
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" placeholder="Enter the password" class="control" required><br>
+
+        <input type="submit" name="s" value="Login" class="control submit-btn">
+
+        <p style="text-align:center; font-size:13px; margin-top:10px;">
+          Don't have an account? <a href="/register" style="color:#1e90ff;">Register</a>
+        </p>
+      </div>
+      <div>
+           
+      </div>
+
+    </form>
+  </div>
+  
+</body>
+</html>

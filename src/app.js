@@ -10,7 +10,7 @@ let bodyparser=require('body-parser');
 
 app.use(express.static('public'));
 app.use(express.urlencoded({extended:true}));
-app.use(bodyParser.json());
+app.use(bodyparser.json());
 
 app.use(session({
     secret:"111111111fdf",
