@@ -25,7 +25,6 @@ exports.validateAd=(req,res)=>{
         //console.log("login id : "+req.session.UserId);
        res.render("Admin_Dashboard.ejs",{msg:"successfully login"});
        
-
     }
     else{
        res.render("Admin_login.ejs",{msg:"Invalid username and password"})
@@ -34,8 +33,6 @@ exports.validateAd=(req,res)=>{
       });
      result.catch((err)=>{
         res.render("error.ejs");
-
-
   });
 }
 
@@ -43,7 +40,6 @@ exports.CourseReg=(req,res)=>{
   res.render("course.ejs");
 
 }
-
 exports.saveC = (req, res) => {
   const { cname } = req.body;
 
