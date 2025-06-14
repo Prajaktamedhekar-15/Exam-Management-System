@@ -36,18 +36,89 @@ exports.validateAd=(req,res)=>{
   });
 }
 
-exports.CourseReg=(req,res)=>{
-  res.render("course.ejs");
-
-}
+exports.CourseReg = (req, res) => {
+  regmodel.viewCourseData()
+    .then((result) => {
+      res.render("course.ejs", { data: result, MSG: "" });
+    })
+    .catch((err) => {
+      res.render("course.ejs", { data: [], MSG: "Error loading data: " + err.message });
+    });
+};
 exports.saveC = (req, res) => {
   const { cname } = req.body;
 
   regmodel.saveCourse(cname)
     .then(() => {
-      res.render("course", { MSG: "Data added successfully" });
+      return regmodel.viewCourseData();
+    })
+    .then((result) => {
+      res.render("course.ejs", { data: result, MSG: "Data added successfully" });
     })
     .catch((err) => {
-      res.render("course", { MSG: "Problem in data adding: " + err.message });
+      res.render("course.ejs", { data: [], MSG: "Problem in data adding: " + err.message });
     });
 };
+
+exports.showCourse = (req, res) => {
+  regmodel.viewCourseData()
+    .then((result) => {
+      res.render("course.ejs", { data: result, MSG: "" });
+    })
+    .catch((err) => {
+      res.render("course.ejs", { data: [], MSG: "Error loading data: " + err.message });
+    });
+};
+
+exports.deleteCourseById = (req, res) => {
+  const id = req.query.c_id;
+
+  regmodel.deleteCourse(id)
+    .then(() => regmodel.viewCourseData())
+    .then((result) => {
+      res.render("course.ejs", {
+        data: result,
+        MSG: "Course deleted successfully"
+      });
+    })
+    .catch((err) => {
+      console.error("Error deleting course:", err.message);
+      res.render("course.ejs", {
+        data: [],
+        MSG: "Error deleting course: " + err.message
+      });
+    });
+};
+
+
+exports.Stu_Exam=(req,res)=>{
+  res.render("exam.ejs");
+  
+}
+
+exports.save_Exam = async (req, res) => {
+  try {
+    let { examName, totalMarks, passingMarks } = req.body;
+
+    // Await the promise
+    await regmodel.saveExamdata(examName, totalMarks, passingMarks);
+
+    // If successful
+    res.render("exam.ejs", { MSG: "Exam saved successfully!" });
+  } catch (err) {
+    // If error occurs
+    console.error("Error saving exam:", err);
+    res.render("exam.ejs", { MSG: "Error saving exam: " + err.message });
+  }
+};
+
+// exports.Stu_Exam = (req, res) => {
+//   regmodel.getAllExamData()
+//     .then((examData) => {
+//       res.render("exam", { data: examData, MSG: "" });
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//       res.render("exam", { data: [], MSG: "Error loading exam data" });
+//     });
+// };

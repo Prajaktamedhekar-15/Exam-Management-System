@@ -13,7 +13,17 @@ router.get("/dashBoard", regCtrl.dashBoardPage);
 
 router.post("/validateAdminData",regCtrl.validateAd);
 
-router.get("/course",regCtrl.CourseReg);
-router.post("/addCourse",regCtrl.saveC);
+
+router.get("/course", regCtrl.showCourse);
+router.post("/addCourse", regCtrl.saveC);
+router.get("/deleteById", regCtrl.deleteCourseById);
+
+router.get("/exam",regCtrl.Stu_Exam);
+
+
+router.post("/SaveExamData",regCtrl.save_Exam);
+
+router.get("/exam", regCtrl.Stu_Exam);
+
 
 module.exports=router;

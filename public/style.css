@@ -194,6 +194,7 @@ body, html {
 /* Main Content */
 .side2 {
     flex: 1;
+    height:500px;
     background-color: #1e1e1e;
     color: #fff;
     padding: 20px;
@@ -272,56 +273,65 @@ body, html {
   width:50%;
   position: relative;
 }
-
-/* ---------------------------------------------------------------- Responsive Design ----------------------------------------------*/
-@media (max-width: 992px) {
-  .D_flex {
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .side1 {
-    width: 100%;
-    height: auto;
-  }
-
-  .side2 {
-    width: 100%;
-  }
-
-  .toshowCourse {
-    flex-direction: column;
-  }
-
-  .c1, .c2 {
-    width: 100%;
-    margin-top: 40px;
-  }
-
-  .course-form-container {
-    width: 100%;
-    height: auto;
-  }
+.viewcourse{
+  width:700px;
 }
 
-@media (max-width: 576px) {
-  .D_nav {
-    font-size: 1.2rem;
-    padding: 15px 20px;
-    text-align: center;
-  }
+/*=================-===========================exam css==================================================*/
 
-  .course-form-container {
-    padding: 20px;
-  }
 
-  .login-box {
-    width: 90%;
-    padding: 30px 20px;
-  }
+.exam-form-container {
+ background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 450px;
+  height: 430px;
+  margin-top: -80px;
+}
 
-  .admin-login-page .acontainer {
-    width: 90%;
-    padding: 25px;
-  }
+.exam-heading {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #333;
+  font-weight: 600;
+}
+
+.exam-form label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #444;
+}
+
+.exam-form input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: border-color 0.3s ease;
+}
+
+.exam-form input:focus {
+  outline: none;
+  border-color: #007BFF;
+}
+
+.exam-form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007BFF;
+  color: white;
+  font-weight: 500;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.exam-form button:hover {
+  background-color: #0056cc;
 }
