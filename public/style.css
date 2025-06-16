@@ -176,7 +176,7 @@ body, html {
 /* Sidebar */
 .side1 {
     width: 20%;
-    height:400px;
+    height:600px;
     background-color: #f0f4f8;
     padding: 20px;
     border-radius: 10px;
@@ -195,6 +195,8 @@ body, html {
 /* Main Content */
 .side2 {
     flex: 1;
+    height:600px;
+    background-color: #dacaca;
     background-color: #f4bbfb;
     color: #fff;
     padding: 20px;
@@ -211,7 +213,7 @@ body, html {
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 450px;
-  height: 300px;
+  min-height: 250px;
 }
 
 .course-form-container h2 {
@@ -273,6 +275,74 @@ body, html {
   width:50%;
   position: relative;
 }
+.viewcourse{
+  width:700px;
+}
+
+/*=================-===========================exam css==================================================*/
+
+
+.exam-form-container {
+ background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 450px;
+  height: 430px;
+  margin-top: -80px;
+}
+
+.exam-heading {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #333;
+  font-weight: 600;
+}
+
+.exam-form label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #444;
+}
+
+.exam-form input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: border-color 0.3s ease;
+}
+
+.exam-form input:focus {
+  outline: none;
+  border-color: #007BFF;
+}
+
+.exam-form button {
+  width: 100%;
+  padding: 10px;
+ background-color: #e0a800;
+  color: white;
+  font-weight: 500;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.exam-form button:hover {
+   background-color: #e0a800;
+}
+
+.c2 p{
+  color: wheat;
+}
+
+/*========================================================*/
 
 /* ---------------------------------------------------------------- Responsive Design ----------------------------------------------*/
 @media (max-width: 992px) {
