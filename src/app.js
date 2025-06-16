@@ -20,7 +20,7 @@ app.use(session({
 
 app.set('view engine',"ejs");
 
-
+//const regRoutes = require("./routes/regRoutes");
 app.use("/",router);
 
 

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Login</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- NEW WRAPPER for consistent style with admin -->
+  <div class="admin-login-page">  
+    <form name="frm" action="/validateStudData" method="POST">
+      <div class="acontainer">  <!-- reuse existing admin box style -->
+
+        <h4 class="ad">Student Login</h4>
+
+        <% if (typeof msg !== 'undefined') { %>
+          <p style="color: red; font-size: 14px; text-align: center;"><%= msg %></p>
+        <% } %>
+
+        <label for="studentName">Student Name</label>
+        <input type="text" id="studentName" name="studentName" placeholder="Enter your name" class="control" required />
+
+        <label for="studentPassword">Student Password</label>
+        <input type="password" id="studentPassword" name="studentPassword" placeholder="Enter your password" class="control" required />
+
+        <input type="submit" value="Login" class="control submit-btn" />
+
+        <p style="text-align:center; font-size:13px; margin-top:10px;">
+          Don't have an account? <a href="/sreg" style="color:#1e90ff;">Register</a>
+        </p>
+        
+      </div>
+    </form>
+  </div>
+</body>
+</html>
