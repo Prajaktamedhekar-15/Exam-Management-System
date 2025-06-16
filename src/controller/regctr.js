@@ -89,36 +89,56 @@ exports.deleteCourseById = (req, res) => {
       });
     });
 };
-
-
-exports.Stu_Exam=(req,res)=>{
-  res.render("exam.ejs");
-  
-}
-
+exports.Stu_Exam = async (req, res) => {
+  try {
+    const result = await regmodel.viewExamData();
+    res.render("exam.ejs", { data: result, MSG: "" });
+  } catch (err) {
+    console.error("Error fetching exams:", err);
+    res.render("exam.ejs", { data: [], MSG: "Error loading exams." });
+  }
+};
 exports.save_Exam = async (req, res) => {
   try {
     let { examName, totalMarks, passingMarks } = req.body;
 
-    // Await the promise
     await regmodel.saveExamdata(examName, totalMarks, passingMarks);
 
-    // If successful
-    res.render("exam.ejs", { MSG: "Exam saved successfully!" });
+    const result = await regmodel.viewExamData(); // fetch updated data
+
+    res.render("exam.ejs", { data: result, MSG: "✅ Exam saved successfully!" });
   } catch (err) {
-    // If error occurs
     console.error("Error saving exam:", err);
-    res.render("exam.ejs", { MSG: "Error saving exam: " + err.message });
+    res.render("exam.ejs", { data: [], MSG: "❌ Error saving exam: " + err.message });
   }
 };
 
-// exports.Stu_Exam = (req, res) => {
-//   regmodel.getAllExamData()
-//     .then((examData) => {
-//       res.render("exam", { data: examData, MSG: "" });
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//       res.render("exam", { data: [], MSG: "Error loading exam data" });
-//     });
-// };
+exports.update_Exam = async (req, res) => {
+  const c_id = req.query.Exam_id;
+
+  try {
+    const result = await regmodel.UpdatedExamData(c_id);
+    res.render("Updated_Exam.ejs", { ExamData: result[0] }); // Make sure to pass result[0]
+  } catch (err) {
+    console.error("Error fetching exam:", err);
+    res.render("exam.ejs", { MSG: "Error loading exam", data: [] });
+  }
+};
+
+exports.up_exam = async (req, res) => {
+  const { Ex_id, examName, totalMarks, passingMarks } = req.body;
+
+  try {
+    await regmodel.UpdatedExamdata(Ex_id, examName, totalMarks, passingMarks);
+    res.redirect("/exam");
+  } catch (err) {
+    console.error("Error in updating:", err);
+    res.send("Error in updating");
+  }
+};
+
+
+
+
+
+

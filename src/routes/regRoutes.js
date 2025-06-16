@@ -21,9 +21,15 @@ router.get("/deleteById", regCtrl.deleteCourseById);
 router.get("/exam",regCtrl.Stu_Exam);
 
 
-router.post("/SaveExamData",regCtrl.save_Exam);
+// router.post("/SaveExamData",regCtrl.save_Exam);
 
-router.get("/exam", regCtrl.Stu_Exam);
+// router.get("/exam", regCtrl.Stu_Exam);
 
 
+router.get("/exam", regCtrl.Stu_Exam);       
+router.post("/SaveExamData", regCtrl.save_Exam); 
+
+router.get("/UpdatedById", regCtrl.update_Exam);
+
+router.post("/updatedUserExam", regCtrl.up_exam);
 module.exports=router;

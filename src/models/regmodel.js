@@ -55,26 +55,24 @@ exports.deleteCourse = async (id) => {
 
 //============================================================================================================================
 
-exports.saveExamdata = (...e_data) => 
-  {
-  return new Promise((resolve, reject) =>
-     {
-    const sql = "INSERT INTO exam VALUES ('0', ?, ?, ?)";
-    conn.query(sql, [...e_data], (err, result) => 
-      {
-      if (err) 
-        {
-        return reject(err);  // Return the error to the caller
-      }
-      resolve(result);  // Return the result to the caller
-    });
-  });
-};
+// exports.saveExamdata = (...e_data) => 
+//   {
+//   return new Promise((resolve, reject) =>
+//      {
+//     const sql = "INSERT INTO exam VALUES ('0', ?, ?, ?)";
+//     conn.query(sql, [...e_data], (err, result) => 
+//       {
+//       if (err) 
+//         {
+//         return reject(err);  // Return the error to the caller
+//       }
+//       resolve(result);  // Return the result to the caller
+//     });
+//   });
+// };
 
-
-//==
-
-// exports.getAllExamData = () => {
+// //=========
+// exports.viewExamData = () => {
 //   return new Promise((resolve, reject) => {
 //     conn.query("SELECT * FROM exam", (err, result) => {
 //       if (err) reject(err);
@@ -83,3 +81,51 @@ exports.saveExamdata = (...e_data) =>
 //   });
 // };
 
+
+exports.saveExamdata = (name, total, passing) => {
+  return new Promise((resolve, reject) => {
+    const sql = "INSERT INTO exam (exname, totalmark, passingmark) VALUES (?, ?, ?)";
+    conn.query(sql, [name, total, passing], (err, result) => {
+      if (err) reject(err);
+      else resolve(result);
+    });
+  });
+};
+
+exports.viewExamData = () => {
+  return new Promise((resolve, reject) => {
+    conn.query("SELECT * FROM exam", (err, result) => {
+      if (err) reject(err);
+      else resolve(result);
+    });
+  });
+};
+
+
+exports.UpdatedExamData = (id) => {
+  return new Promise((resolve, reject) => {
+    conn.query("SELECT * FROM exam WHERE ex_id = ?", [id], (err, result) => {
+      if (err) {
+        console.error("DB fetch error:", err);
+        return reject("Error fetching exam data");
+      }
+      resolve(result); // array of results
+    });
+  });
+};
+
+exports.UpdatedExamdata = (Ex_id, examName, totalMarks, passingMarks) => {
+  return new Promise((resolve, reject) => {
+    conn.query(
+      "UPDATE exam SET exname = ?, totalmark = ?, passingmark = ? WHERE ex_id = ?",
+      [examName, totalMarks, passingMarks, Ex_id],
+      (err, result) => {
+        if (err) {
+          console.error("DB update error:", err);
+          return reject("Error updating exam data");
+        }
+        resolve(result); // returns result object with affectedRows, etc.
+      }
+    );
+  });
+};

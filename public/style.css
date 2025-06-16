@@ -175,7 +175,7 @@ body, html {
 /* Sidebar */
 .side1 {
     width: 20%;
-    height:400px;
+    height:600px;
     background-color: #f0f4f8;
     padding: 20px;
     border-radius: 10px;
@@ -194,8 +194,8 @@ body, html {
 /* Main Content */
 .side2 {
     flex: 1;
-    height:500px;
-    background-color: #1e1e1e;
+    height:600px;
+    background-color: #dacaca;
     color: #fff;
     padding: 20px;
     border-radius: 12px;
@@ -211,7 +211,7 @@ body, html {
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 450px;
-  height: 300px;
+  min-height: 250px;
 }
 
 .course-form-container h2 {
@@ -322,7 +322,7 @@ body, html {
 .exam-form button {
   width: 100%;
   padding: 10px;
-  background-color: #007BFF;
+ background-color: #e0a800;
   color: white;
   font-weight: 500;
   font-size: 16px;
@@ -333,5 +333,11 @@ body, html {
 }
 
 .exam-form button:hover {
-  background-color: #0056cc;
+   background-color: #e0a800;
 }
+
+.c2 p{
+  color: wheat;
+}
+
+/*========================================================*/
