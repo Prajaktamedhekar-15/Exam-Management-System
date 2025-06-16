@@ -13,6 +13,36 @@ router.get("/dashBoard", regCtrl.dashBoardPage);
 
 router.post("/validateAdminData",regCtrl.validateAd);
 
+router.get("/course",regCtrl.CourseReg);
+router.post("/addCourse",regCtrl.saveC);
+
+/*=============student reg==============*/
+router.get("/sreg",regCtrl.AddStud);
+
+router.post("/registerstudent",regCtrl.saveS);
+
+/*=============stud login================*/
+router.get("/slogin",regCtrl.StudLogin);
+
+router.post("/validateStudData", regCtrl.validateStud);
+
+//router.get("/ValidateStudData",regCtrl.validateStud);
+
+//==============Display Admin Data===============
+
+router.get("/adinfo",regCtrl.admininfo);
+
+//==============student dashboard===================
+router.get("/studDash",regCtrl.StudDash);
+
+//=====================student details===============
+router.get("/studentDetails", regCtrl.StudentDetails);
+
+
+
+
+
+
 
 router.get("/course", regCtrl.showCourse);
 router.post("/addCourse", regCtrl.saveC);
@@ -33,3 +63,5 @@ router.get("/UpdatedById", regCtrl.update_Exam);
 
 router.post("/updatedUserExam", regCtrl.up_exam);
 module.exports=router;
+
+

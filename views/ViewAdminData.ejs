@@ -6,13 +6,6 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css"> 
 </head>
-<style>
-  .admin-box {
-    color: white;
-    padding: 20px;
-  }
-</style>
-
 <body>
     
     <div class="D_container">
@@ -26,18 +19,38 @@
                 <ul>
                     <a href="/adinfo"><li>Admin</li>    </a>
                     <a href="/course"><li>subject</li> </a>
-                    <a href="/exam"> <li>Exam</li> </a>
+                    <a href=""> <li>Exam</li> </a>
                   <a href=""> <li>Question</li> </a>
                   <a href=""> <li>schedule</li> </a>
-                  <a href="/dashBoard"> <li>Dashboard</li> </a>
                 </ul>
                 
             </div>
-            <div class="side2">
-               
-            </div>
-        </div>
+        <div class="side2">
+          <div class="flexdiv">
+        <div class="admin-title">Admin Information</div>
+<table class="admin-table">
+  <tr>
+    <th>Admin ID</th>
+    <th>Admin Name</th>
+    <th>Admin Password</th>
+  </tr>
+ <tr>
+  <td><%= admin.adm_id %></td>
+  <td><%= admin.aname %></td>
+  <td><%= admin.apassword %></td>
+</tr>
 
+</table>
+     </div>
+    </div>   
+
+  
+</div>
+ 
+
+        </div>
+        </div>
+         
 
 
         

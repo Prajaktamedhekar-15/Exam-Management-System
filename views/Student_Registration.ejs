@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Registration</title>
+  <link rel="stylesheet" href="style.css" /> 
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="student-register-page">
+  <form class="frm" action="/registerstudent" method="POST"> 
+    <div class="student-container">
+      <h2 class="login-title">Student Registration</h2>
+
+      <div class="form-group">
+        <label for="name">Enter the Name</label>
+        <input type="text" id="name" name="sname" required />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Enter the Email</label>
+        <input type="email" id="email" name="semail" required />
+      </div>
+	  
+	  <div class="form-group">
+        <label for="contact">Enter the Contact</label>
+        <input type="text" id="contact" name="scontact" required />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Enter the Password</label>
+        <input type="password" id="password" name="spassword" required />
+      </div>
+
+      
+
+      <button type="submit" class="btn-login">Submit</button>
+
+      <p class="register-msg">
+        Already have an account? <a href="/slogin">Login</a>
+      </p>
+    </div>
+  </form>
+ </div>
+</body>
+</html>

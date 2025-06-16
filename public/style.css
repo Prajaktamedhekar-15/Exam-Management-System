@@ -3,7 +3,7 @@
 body, html {
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Roboto','Segoe UI', sans-serif;
   height: 100%;
 }
 
@@ -17,7 +17,7 @@ body, html {
 
 /* Card Style */
 .login-box {
-  background: white;
+  background: rgb(252, 253, 253);
   padding: 40px 30px;
   border-radius: 15px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
@@ -71,7 +71,7 @@ body, html {
     transform: translateY(0);
   }
 }
-/*---------------------admin css--------------------*/
+/*---------------------admin/Student css--------------------*/
 
 .admin-login-page {
     height: 100vh;
@@ -87,7 +87,7 @@ body, html {
     background: #fff;
     padding: 30px 40px;
     border-radius: 15px;
-    width: 320px;
+    width: 450px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
     animation: fadeIn 0.7s ease;
 }
@@ -107,7 +107,7 @@ body, html {
 }
 
 .admin-login-page .control {
-    width: 100%;
+    width: 95%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -122,6 +122,7 @@ body, html {
 
 .admin-login-page .submit-btn {
     margin-top: 20px;
+    margin-left: 10px;
     background-color: #1e90ff;
     color: white;
     font-weight: bold;
@@ -196,6 +197,7 @@ body, html {
     flex: 1;
     height:600px;
     background-color: #dacaca;
+    background-color: #f4bbfb;
     color: #fff;
     padding: 20px;
     border-radius: 12px;
@@ -341,3 +343,184 @@ body, html {
 }
 
 /*========================================================*/
+
+/* ---------------------------------------------------------------- Responsive Design ----------------------------------------------*/
+@media (max-width: 992px) {
+  .D_flex {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .side1 {
+    width: 100%;
+    height: auto;
+  }
+
+  .side2 {
+    width: 100%;
+  }
+
+  .toshowCourse {
+    flex-direction: column;
+  }
+
+  .c1, .c2 {
+    width: 100%;
+    margin-top: 40px;
+  }
+
+  .course-form-container {
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .D_nav {
+    font-size: 1.2rem;
+    padding: 15px 20px;
+    text-align: center;
+  }
+
+  .course-form-container {
+    padding: 20px;
+  }
+
+  .login-box {
+    width: 90%;
+    padding: 30px 20px;
+  }
+
+  .admin-login-page .acontainer {
+    width: 90%;
+    padding: 25px;
+  }
+}
+
+
+
+
+/*=====================student registration===============================*/
+.student-container {
+  background: #fff;
+  padding: 40px;
+  width: 90%; /* Use most of the screen */
+  width: 550px; /* Increase this value as needed */
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+
+.student-container:hover {
+  transform: translateY(-3px);
+}
+
+.student-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+
+.student-register-page {
+  height: 100vh;
+  background: linear-gradient(to right, #74ebd5, #acb6e5); /* Soft gradient */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.8s ease;
+}
+
+
+
+.login-title {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 25px;
+  color: #222;
+}
+
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.form-group input {
+  width: 95%;
+  padding: 10px;
+  font-size: 15px;
+  border: 1.5px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus {
+  border-color: #4285F4;
+  box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.2);
+  outline: none;
+}
+
+
+.btn-login {
+  width: 95%;
+  padding: 12px;
+  margin-left:10px;
+  background-color: #2e7d32;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-login:hover {
+  background-color: #1b5e20;
+}
+
+
+.register-msg {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 15px;
+}
+
+.register-msg a {
+  color: #1976d2;
+  text-decoration: none;
+}
+
+.register-msg a:hover {
+  text-decoration: underline;
+}
+
+
+@media (max-width: 600px) {
+  .student-container {
+    padding: 25px;
+  }
+
+  .login-title {
+    font-size: 22px;
+  }
+
+  .form-group input {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .btn-login {
+    font-size: 15px;
+    padding: 10px;
+  }
+}
+

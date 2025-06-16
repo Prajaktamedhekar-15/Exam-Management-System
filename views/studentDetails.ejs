@@ -1,0 +1,47 @@
+<style>
+    .student-table {
+        width: 90%;
+        margin: 30px auto;
+        border-collapse: collapse;
+        background-color: #1a1a1a;
+        color: #fff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .student-table th, .student-table td {
+        padding: 14px 20px;
+        text-align: center;
+        border: 1px solid #333;
+    }
+
+    .student-table th {
+        background-color: #0f4c81;
+        color: white;
+        font-size: 16px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .student-table tr:hover {
+        background-color: #333333;
+    }
+</style>
+
+<table class="student-table">
+    <tr>
+        <th>Student ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Contact</th>
+        <th>Password</th>
+    </tr>
+    <tr>
+        <td><%= student.sid %></td>
+        <td><%= student.sname %></td>
+        <td><%= student.semail %></td>
+        <td><%= student.scontact %></td>
+        <td>********</td>
+    </tr>
+</table>

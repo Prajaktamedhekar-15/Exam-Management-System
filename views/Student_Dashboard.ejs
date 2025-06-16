@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        /* Your same style, keep it */
+    </style>
+</head>
+<body>
+    <div class="D_container">
+        <div class="D_nav"><center><strong>Welcome to exam application system</strong></center></div>
+
+        <div class="D_flex">
+            <div class="side1">
+                <center><h2>Student</h2></center> 
+                <ul>
+                    <li><a href="#" onclick="loadDetails()">Student Details</a></li>
+                    <li><a href="#">Exam Form Details</a></li>
+                    <li><a href="#">Download MCQ PDF</a></li>
+                    <li><a href="#">Question</a></li>
+                    <li><a href="#">Schedule</a></li>
+                </ul>
+            </div>
+
+            <div class="side2" id="content">
+                <center><h3>Welcome, you are logged in!</h3></center>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function loadDetails() {
+            fetch("/studentDetails")
+                .then(res => res.text())
+                .then(data => {
+                    document.getElementById("content").innerHTML = data;
+                });
+        }
+    </script>
+</body>
+</html>
