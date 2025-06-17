@@ -251,6 +251,78 @@ exports.up_exam = async (req, res) => {
 
 
 
+exports.Questionform = (req, res) => {
+  Promise.all([
+    regmodel.getAllQuestion(),
+    new Promise((resolve, reject) => {
+      conn.query("SELECT * FROM course", (err, result) => {
+        if (err) reject(err);
+        else resolve(result);
+      });
+    })
+  ])
+  .then(([questions, courses]) => {
+    res.render("addQuestion", { questions, courses });
+  })
+  .catch((err) => {
+    console.error("Error loading question form:", err);
+    res.status(500).send("Internal Server Error");
+  });
+};
 
+// Save New Question
+exports.SaveQuestions = (req, res) => {
+  const { question, option1, option2, option3, option4, correctAnswer, course_id } = req.body;
 
+  const insertQ = `INSERT INTO question (qname, op1, op2, op3, op4, answer) VALUES (?, ?, ?, ?, ?, ?)`;
+  const values = [question, option1, option2, option3, option4, correctAnswer];
 
+  conn.query(insertQ, values, (err, result) => {
+    if (err) return res.status(500).send("Error saving question");
+
+    const qid = result.insertId;
+    conn.query(`INSERT INTO coursequestionjoin (qid, cid) VALUES (?, ?)`, [qid, course_id], (err2) => {
+      if (err2) return res.status(500).send("Error linking question to course");
+
+      res.redirect('/question');
+    });
+  });
+};
+
+//=================================================================================
+exports.scheduleForm = (req, res) => {
+  regmodel.getAllCourses((err1, courses) => {
+    if (err1) {
+      console.error("Error fetching courses:", err1);
+      return res.status(500).send("Server error");
+    }
+
+    regmodel.getAllExams((err2, exams) => {
+      if (err2) {
+        console.error("Error fetching exams:", err2);
+        return res.status(500).send("Server error");
+      }
+
+      res.render("Schedule", { courses, exams });
+    });
+  });
+};
+exports.saveSchedule = (req, res) => {
+  const { sdate, starttime, endtime, course_id, exam_id } = req.body;
+
+  // Convert to integers if needed
+  const cid = parseInt(course_id);
+  const ex_id = parseInt(exam_id);
+
+  // Optional: check
+  console.log("Controller values:", { sdate, starttime, endtime, cid, ex_id });
+
+  regmodel.saveSchedule(sdate, starttime, endtime, cid, ex_id, (err, result) => {
+    if (err) {
+      console.error("Failed to insert schedule:", err);
+      return res.status(500).send("Error saving schedule");
+    }
+
+    res.redirect("/Schedule");
+  });
+};
