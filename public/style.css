@@ -5,6 +5,7 @@ body, html {
   padding: 0;
   font-family: 'Roboto','Segoe UI', sans-serif;
   height: 100%;
+  background-image: url("Home.jpg");
 }
 
 .background {
@@ -13,6 +14,7 @@ body, html {
   display: flex;
   align-items: center;
   justify-content: center;
+  background-image: url("Home.jpg");
 }
 
 /* Card Style */
@@ -80,6 +82,7 @@ body, html {
     justify-content: center;
     align-items: center;
     font-family: 'Segoe UI', sans-serif;
+    background-image: url("Home.jpg");
 }
 
 /* Target only inside .admin-login-page */
@@ -176,8 +179,8 @@ body, html {
 /* Sidebar */
 .side1 {
     width: 20%;
-    height:600px;
-    background-color: #f0f4f8;
+    height:500px;
+    background-color: #0b0b0b;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -186,23 +189,31 @@ body, html {
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
+    background-color: rgba(2, 2, 2, 0.6);
+
+
 }
 
 .side1 ul a{
     text-decoration: none;
     line-height: 30px;
+    color:white;
 } 
 /* Main Content */
 .side2 {
     flex: 1;
-    height:600px;
-    background-color: #dacaca;
-    background-color: #f4bbfb;
+    height:500px;
+    background-color: teal;
+    
     color: #fff;
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: rgba(131, 129, 129, 0.6);
+}
+.ss{
+  color:white;
 }
 
 /*----------------------------------------------------------course form-------------------------------------------------------------------*/

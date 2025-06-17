@@ -15,13 +15,15 @@
 
         <div class="D_flex">
             <div class="side1">
-                <center><h2>Student</h2></center> 
+                <center><h2 class="ss">Student</h2></center> 
                 <ul>
                     <li><a href="#" onclick="loadDetails()">Student Details</a></li>
+                    <li><a href="#" onclick="loadRegister()">Student Register</a></li>
                     <li><a href="#">Exam Form Details</a></li>
                     <li><a href="#">Download MCQ PDF</a></li>
                     <li><a href="#">Question</a></li>
                     <li><a href="#">Schedule</a></li>
+                    <li><a href="/studDash">Dashboard</a></li>
                 </ul>
             </div>
 
@@ -39,6 +41,19 @@
                     document.getElementById("content").innerHTML = data;
                 });
         }
-    </script>
+
+
+        function loadRegister() {
+    fetch("/registerForm")
+        .then(res => res.text())
+        .then(data => {
+            document.getElementById("content").innerHTML = data;
+        });
+}
+    
+    
+
+    
+     </script>
 </body>
 </html>

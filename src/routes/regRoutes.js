@@ -4,6 +4,8 @@ let router=express.Router();
 
 let regCtrl=require("../controller/regctr.js");
 
+let conn = require("../config/db.js");
+
 
 router.get("/",regCtrl.homepage);
 
@@ -38,7 +40,18 @@ router.get("/studDash",regCtrl.StudDash);
 //=====================student details===============
 router.get("/studentDetails", regCtrl.StudentDetails);
 
+//=====================student register ineternal====================
+router.get("/register",regCtrl.loadRegisterForm);
 
+router.post("/register",regCtrl.saveStudent);
+
+// Show only the form HTML (partial) dynamically
+router.get("/registerForm", (req, res) => {
+    conn.query("SELECT * FROM schedule s JOIN course c ON s.cid = c.cid JOIN exam e ON s.ex_id = e.ex_id", (err, rows) => {
+        if (err) return res.status(500).send("DB Error");
+        res.render("StudentRegister", { schedules: rows });
+    });
+});
 
 
 

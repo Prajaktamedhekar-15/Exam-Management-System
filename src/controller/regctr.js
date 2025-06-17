@@ -1,5 +1,5 @@
 let regmodel=require("../models/regmodel.js");
-//const regService=require("../services/regService.js");
+const service=require("../services/regService.js");
 const conn=require("../config/db.js");
 exports.dashBoardPage = (req, res) => {
   res.render("Admin_Dashboard.ejs");
@@ -135,7 +135,7 @@ exports.admininfo = (req, res) => {
   });
 };
 
-//======================Student Login==========================
+
 
 
 
@@ -178,6 +178,28 @@ exports.StudentDetails = (req, res) => {
   res.render("studentDetails", { student });
 };
 
+//==================student reg internal================
+
+exports.loadRegisterForm = async (req, res) => {
+  try {
+    const schedules = await service.getExamSchedules();
+    res.render('studentRegister', { schedules });
+  } catch (err) {
+    console.error("Error loading register form:", err);  // <-- this will show real error in console
+    res.status(500).send("Error loading form");
+  }
+};
+
+
+exports.saveStudent = async (req, res) => {
+  const data = req.body;
+  try {
+    await service.saveStudent(data);
+    res.send("Student Registered Successfully");
+  } catch (err) {
+    res.status(500).send("Error saving student");
+  }
+}
 
 exports.Stu_Exam = async (req, res) => {
   try {
