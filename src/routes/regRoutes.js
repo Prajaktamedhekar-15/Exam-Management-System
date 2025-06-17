@@ -51,9 +51,6 @@ router.get("/deleteById", regCtrl.deleteCourseById);
 router.get("/exam",regCtrl.Stu_Exam);
 
 
-// router.post("/SaveExamData",regCtrl.save_Exam);
-
-// router.get("/exam", regCtrl.Stu_Exam);
 
 
 router.get("/exam", regCtrl.Stu_Exam);       
@@ -62,6 +59,17 @@ router.post("/SaveExamData", regCtrl.save_Exam);
 router.get("/UpdatedById", regCtrl.update_Exam);
 
 router.post("/updatedUserExam", regCtrl.up_exam);
+
+
+router.get('/question', regCtrl.Questionform);
+router.post('/saveQues', regCtrl.SaveQuestions);
+
+
+
+
+router.get('/schedule', regCtrl.scheduleForm);
+router.post('/saveSchedule', regCtrl.saveSchedule);
+
 module.exports=router;
 
 

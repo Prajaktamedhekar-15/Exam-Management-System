@@ -32,6 +32,11 @@ exports.saveCourse = (cname) => {
   });
 };
 
+
+
+
+
+
 /*=====================student reg================*/
 exports.saveStud = ({ sname, semail, spassword, scontact }) => {
   return new Promise((resolve, reject) => {
@@ -103,32 +108,6 @@ exports.deleteCourse = async (id) => {
 
 //============================================================================================================================
 
-// exports.saveExamdata = (...e_data) => 
-//   {
-//   return new Promise((resolve, reject) =>
-//      {
-//     const sql = "INSERT INTO exam VALUES ('0', ?, ?, ?)";
-//     conn.query(sql, [...e_data], (err, result) => 
-//       {
-//       if (err) 
-//         {
-//         return reject(err);  // Return the error to the caller
-//       }
-//       resolve(result);  // Return the result to the caller
-//     });
-//   });
-// };
-
-// //=========
-// exports.viewExamData = () => {
-//   return new Promise((resolve, reject) => {
-//     conn.query("SELECT * FROM exam", (err, result) => {
-//       if (err) reject(err);
-//       else resolve(result);
-//     });
-//   });
-// };
-
 
 exports.saveExamdata = (name, total, passing) => {
   return new Promise((resolve, reject) => {
@@ -176,4 +155,42 @@ exports.UpdatedExamdata = (Ex_id, examName, totalMarks, passingMarks) => {
       }
     );
   });
+};
+
+exports.getAllQuestion = () => {
+  const sql = `
+    SELECT q.*, c.cname
+    FROM question q
+    JOIN coursequestionjoin cqj ON q.qid = cqj.qid
+    JOIN course c ON cqj.cid = c.cid
+  `;
+
+  return new Promise((resolve, reject) => {
+    conn.query(sql, (err, result) => {
+      if (err) return reject(err);
+      resolve(result);
+    });
+  });
+};
+
+
+//================================================
+
+exports.getAllCourses = (callback) => {
+  const sql = "SELECT * FROM course";
+  conn.query(sql, callback);
+};
+
+exports.getAllExams = (callback) => {
+  const sql = "SELECT * FROM exam";
+  conn.query(sql, callback);
+};
+
+exports.saveSchedule = (sdate, starttime, endtime, cid, ex_id, callback) => {
+  const sql = `INSERT INTO schedule (date, starttime, endtime, cid, ex_id) VALUES (?, ?, ?, ?, ?)`;
+  
+  // Check values
+  console.log("Schedule values:", sdate, starttime, endtime, cid, ex_id);
+  
+  conn.query(sql, [sdate, starttime, endtime, cid, ex_id], callback);
 };

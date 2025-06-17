@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Schedule Exam</title>
+  <link rel="stylesheet" href="/style.css"/>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body>
+  <div class="D_container">
+    <br><br><br>
+    <div class="D_nav text-center">
+      Welcome to Exam Application System
+    </div>
+
+    <div class="D_flex d-flex">
+      <!-- Sidebar -->
+      <div class="side1 p-3" style="width: 250px;">
+        <center><h2>Admin</h2></center>
+        <ul class="list-unstyled">
+          <li><a href="/dashboard">Admin</a></li>
+          <li><a href="/course">Subject</a></li>
+          <li><a href="/exam">Exam</a></li>
+          <li><a href="/question">Question</a></li>
+          <li><a href="/schedule">Schedule</a></li>
+          <li><a href="/dashBoard">Dashboard</a></li>
+        </ul>
+      </div>
+
+      <!-- Main Content -->
+      <div class="side2 flex-grow-1 p-4">
+        <br><br>
+        <div class="course-form-container mb-4 w-50 mx-auto shadow p-4 rounded bg-white">
+          <h2 class="text-center mb-4">Schedule Form</h2>
+          <form action="/saveSchedule" method="POST">
+            <div class="mb-3">
+              <label for="sdate" class="form-label">Schedule Date</label>
+              <input type="date" id="sdate" name="sdate" class="form-control" required />
+            </div>
+
+            <div class="row mb-3">
+              <div class="col">
+                <label for="starttime" class="form-label">Start Time</label>
+                <input type="time" id="starttime" name="starttime" class="form-control" required />
+              </div>
+              <div class="col">
+                <label for="endtime" class="form-label">End Time</label>
+                <input type="time" id="endtime" name="endtime" class="form-control" required />
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="course" class="form-label">Course</label>
+              <select id="course" name="course_id" class="form-select" required>
+                <option value="">Select Course</option>
+                <% courses.forEach(course => { %>
+                  <option value="<%= course.cid %>"><%= course.cname %></option>
+                <% }); %>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="exam" class="form-label">Exam</label>
+              <select id="exam" name="exam_id" class="form-select" required>
+                <option value="">Select Exam</option>
+                <%exams.forEach(exam => { %> 
+                  <option value="<%= exam.ex_id %>"><%= exam.exname %></option>
+                <% }); %>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Submit Schedule</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
