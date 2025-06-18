@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Edit Schedule</title>
+  <link rel="stylesheet" href="/style.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+  <div class="D_container">
+    <br><br><br>
+
+    <div class="D_nav text-center">
+      Welcome to Exam Application System
+    </div>
+
+    <div class="D_flex d-flex">
+      <!-- Sidebar -->
+      <div class="side1 p-3" style="width: 250px;">
+        <center><h2>Admin</h2></center>
+        <ul class="list-unstyled">
+          <li><a href="/adinfo">Admin</a></li>
+          <li><a href="/course">Subject</a></li>
+          <li><a href="/exam">Exam</a></li>
+          <li><a href="/question">Question</a></li>
+          <li><a href="/schedule">Schedule</a></li>
+          <li><a href="/dashBoard">Dashboard</a></li>
+        </ul>
+      </div>
+
+      <!-- Main Content -->
+      <div class="side2 flex-grow-1 p-3">
+        <center><h2 class="mb-4">✏️ Edit Schedule</h2></center>
+
+        <form method="POST" action="/schedule/update/<%= schedule.schid %>" class="w-50 mx-auto">
+          <input type="hidden" name="schid" value="<%= schedule.schid %>">
+
+          <div class="mb-3">
+            <label for="date" class="form-label">Date</label>
+            <input type="date" id="date" name="date" class="form-control" value="<%= schedule.date.toISOString().substring(0,10) %>" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="starttime" class="form-label">Start Time</label>
+            <input type="time" id="starttime" name="starttime" class="form-control" value="<%= schedule.starttime %>" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="endtime" class="form-label">End Time</label>
+            <input type="time" id="endtime" name="endtime" class="form-control" value="<%= schedule.endtime %>" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="cid" class="form-label">Course</label>
+            <select name="cid" id="cid" class="form-select" required>
+              <% subjects.forEach(course => { %>
+                <option value="<%= course.cid %>" <%= schedule.cid === course.cid ? 'selected' : '' %>><%= course.cname %></option>
+              <% }) %>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="ex_id" class="form-label">Exam</label>
+            <select name="ex_id" id="ex_id" class="form-select" required>
+              <% exams.forEach(exam => { %>
+                <option value="<%= exam.ex_id %>" <%= schedule.ex_id === exam.ex_id ? 'selected' : '' %>><%= exam.exname %></option>
+              <% }) %>
+            </select>
+          </div>
+
+          <div class="text-center">
+            <button type="submit" class="btn btn-success">
+              <i class="fa-solid fa-floppy-disk me-1"></i> Update Schedule
+            </button>
+            <a href="/schedule" class="btn btn-secondary ms-2">
+              <i class="fa-solid fa-arrow-left me-1"></i> Cancel
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

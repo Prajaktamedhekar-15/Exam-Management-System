@@ -106,6 +106,7 @@ exports.deleteCourse = async (id) => {
 };
 
 
+
 //============================================================================================================================
 
 
@@ -175,22 +176,108 @@ exports.getAllQuestion = () => {
 
 
 //================================================
+// exports.getAllCourses = (callback) => {
+//   const sql = "SELECT * FROM course";
+//   conn.query(sql, callback);
+// };
 
+// exports.getAllExams = (callback) => {
+//   const sql = "SELECT * FROM exam";
+//   conn.query(sql, callback);
+// };
+
+// exports.saveSchedule = (sdate, starttime, endtime, cid, ex_id, callback) => {
+//   const sql = `INSERT INTO schedule (date, starttime, endtime, cid, ex_id) VALUES (?, ?, ?, ?, ?)`;
+//   conn.query(sql, [sdate, starttime, endtime, cid, ex_id], callback);
+// };
+
+// exports.getAllSchedules = (callback) => {
+//   const sql = `
+//     SELECT s.*, c.cname, e.exname 
+//     FROM schedule s
+//     JOIN course c ON s.cid = c.cid
+//     JOIN exam e ON s.ex_id = e.ex_id
+//   `;
+//   conn.query(sql, callback);
+// };
+
+
+
+// exports.getUpdateScheduleForm = (req, res) => {
+//   const { schid } = req.params;
+//   const getSchedule = "SELECT * FROM schedule WHERE schid = ?";
+//   const getCourses = "SELECT * FROM course";
+//   const getExams = "SELECT * FROM exam";
+//   db.query(getSchedule, [schid], (err, schedules) => {
+//     if (err || schedules.length === 0) return res.status(500).send("Schedule not found");
+//     db.query(getCourses, (err, subjects) => {
+//       if (err) return res.status(500).send("Error loading courses");
+//       db.query(getExams, (err, exams) => {
+//         if (err) return res.status(500).send("Error loading exams");
+//         res.render("updated_Schedule.ejs", {
+//           schedule: schedules[0],
+//           subjects:subjects,
+//           exams:exams
+//         });
+//       });
+//     });
+//   });
+// };
+
+// exports.updateSchedule = (req, res) => {
+//   const { schid } = req.params;
+//   const { date, starttime, endtime, cid, ex_id } = req.body;
+//   const sql = 'UPDATE schedule SET date=?, starttime=?, endtime=?, cid=?, ex_id=? WHERE schid=?';
+//   db.query(sql, [date, starttime, endtime, cid, ex_id, schid], (err) => {
+//     if (err) return res.status(500).send("Database error");
+//     res.redirect("/schedule");
+//   });
+// };
+
+
+// Get all courses
 exports.getAllCourses = (callback) => {
   const sql = "SELECT * FROM course";
   conn.query(sql, callback);
 };
 
+// Get all exams
 exports.getAllExams = (callback) => {
   const sql = "SELECT * FROM exam";
   conn.query(sql, callback);
 };
 
+// Save new schedule
 exports.saveSchedule = (sdate, starttime, endtime, cid, ex_id, callback) => {
   const sql = `INSERT INTO schedule (date, starttime, endtime, cid, ex_id) VALUES (?, ?, ?, ?, ?)`;
-  
-  // Check values
-  console.log("Schedule values:", sdate, starttime, endtime, cid, ex_id);
-  
   conn.query(sql, [sdate, starttime, endtime, cid, ex_id], callback);
+};
+
+// Get all schedule with course and exam names
+exports.getAllSchedules = (callback) => {
+  const sql = `
+    SELECT s.*, c.cname, e.exname 
+    FROM schedule s
+    JOIN course c ON s.cid = c.cid
+    JOIN exam e ON s.ex_id = e.ex_id
+  `;
+  conn.query(sql, callback);
+};
+
+// Delete a schedule
+exports.deleteSchedule = (schid, callback) => {
+  const sql = "DELETE FROM schedule WHERE schid = ?";
+  conn.query(sql, [schid], callback);
+};
+
+// Get a schedule by ID
+exports.getScheduleById = (schid, callback) => {
+  const sql = "SELECT * FROM schedule WHERE schid = ?";
+  conn.query(sql, [schid], callback);
+};
+
+// Update schedule
+exports.updateSchedule = (date, starttime, endtime, cid, ex_id, schid, callback) => {
+  const sql = 'UPDATE schedule SET date=?, starttime=?, endtime=?, cid=?, ex_id=? WHERE schid=?';
+  conn.query(sql, [date, starttime, endtime, cid, ex_id, schid], callback);
 };

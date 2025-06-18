@@ -90,117 +90,7 @@ exports.deleteCourseById = (req, res) => {
     });
 };
 
-/*=========stud reg==================*/
-exports.AddStud=(req,res)=>{
-    res.render("Student_Registration.ejs");
-};
-
-exports.saveS = (req, res) => {
-  const { sname, semail, spassword, scontact } = req.body;
-
-  regmodel.saveStud({ sname, semail, spassword, scontact })
-    .then(() => {
-      res.render("Student_login");  
-    })
-    .catch((err) => {
-      console.error("Error inserting student:", err);
-      res.render("Student_login");  
-    });
-};
-
-//===============student login==============
-
-exports.StudLogin=(req,res)=>{
-    res.render("Student_login.ejs");
-};
-
-//===============display admin msg===============
-
-
-exports.admininfo = (req, res) => {
-  const aid = req.session.adminid; 
-
-  regmodel.getAdminById(aid, (err, adminData) => {
-    if (err) {
-      console.error("DB error:", err);
-      return res.send("Database error");
-    }
-
-    if (adminData) {  
-      console.log("Admin Data from DB:", adminData);  
-      res.render("ViewAdminData", { admin: adminData }); 
-    } else {
-      res.send("No admin found");
-    }
-  });
-};
-
-
-
-
-
-
-//===============student dashboard================
-exports.StudDash= (req,res)=>{
-  res.render("Student_Dashboard.ejs");
-}
-
-
-exports.validateStud = (req, res) => {
-  const { studentName, studentPassword } = req.body;
-
-  regmodel.ValidateStud(studentName, studentPassword)
-    .then((result) => {
-      if (result.length > 0) {
-        req.session.studentId = result[0].sid;
-        req.session.studentData = result[0];  // Save for later fetch
-
-        res.render("Student_Dashboard");  // Just show welcome message
-      } else {
-        res.render("Student_login", { msg: "Invalid credentials" });
-      }
-    })
-    .catch((err) => {
-      console.error("Student login error:", err);
-      res.render("error.ejs");
-    });
-};
-
-//=====================student details========================
-
-exports.StudentDetails = (req, res) => {
-  const student = req.session.studentData;
-
-  if (!student) {
-    return res.status(403).send("Unauthorized");
-  }
-
-  res.render("studentDetails", { student });
-};
-
-//==================student reg internal================
-
-exports.loadRegisterForm = async (req, res) => {
-  try {
-    const schedules = await service.getExamSchedules();
-    res.render('studentRegister', { schedules });
-  } catch (err) {
-    console.error("Error loading register form:", err);  // <-- this will show real error in console
-    res.status(500).send("Error loading form");
-  }
-};
-
-
-exports.saveStudent = async (req, res) => {
-  const data = req.body;
-  try {
-    await service.saveStudent(data);
-    res.send("Student Registered Successfully");
-  } catch (err) {
-    res.status(500).send("Error saving student");
-  }
-}
-
+//==================================exam ==========================
 exports.Stu_Exam = async (req, res) => {
   try {
     const result = await regmodel.viewExamData();
@@ -290,39 +180,232 @@ exports.SaveQuestions = (req, res) => {
 };
 
 //=================================================================================
+// exports.scheduleForm = (req, res) => {
+//   regmodel.getAllCourses((err1, courses) => {
+//     if (err1) return res.status(500).send("Error fetching courses");
+
+//     regmodel.getAllExams((err2, exams) => {
+//       if (err2) return res.status(500).send("Error fetching exams");
+
+//       regmodel.getAllSchedules((err3, scheduleList) => {
+//         if (err3) return res.status(500).send("Error fetching schedule list");
+
+//         res.render("Schedule", { courses, exams, scheduleList });
+//       });
+//     });
+//   });
+// };
+
+// exports.saveSchedule = (req, res) => {
+//   const { sdate, starttime, endtime, course_id, exam_id } = req.body;
+//   const cid = parseInt(course_id);
+//   const ex_id = parseInt(exam_id);
+
+//   regmodel.saveSchedule(sdate, starttime, endtime, cid, ex_id, (err) => {
+//     if (err) return res.status(500).send("Failed to save schedule");
+//     res.redirect("/schedule");
+//   });
+// };
+
+// exports.deleteSchedule = (req, res) => {
+//   const { schid } = req.params;
+//   const sql = "DELETE FROM schedule WHERE schid = ?";
+//   db.query(sql, [schid], (err) => {
+//     if (err) return res.status(500).send("Error deleting schedule");
+//     res.redirect("/schedule");
+//   });
+// };
+
+
+// Show form and schedule list
 exports.scheduleForm = (req, res) => {
   regmodel.getAllCourses((err1, courses) => {
-    if (err1) {
-      console.error("Error fetching courses:", err1);
-      return res.status(500).send("Server error");
-    }
+    if (err1) return res.status(500).send("Error fetching courses");
 
     regmodel.getAllExams((err2, exams) => {
-      if (err2) {
-        console.error("Error fetching exams:", err2);
-        return res.status(500).send("Server error");
-      }
+      if (err2) return res.status(500).send("Error fetching exams");
 
-      res.render("Schedule", { courses, exams });
+      regmodel.getAllSchedules((err3, scheduleList) => {
+        if (err3) return res.status(500).send("Error fetching schedule list");
+
+        res.render("Schedule", {
+          courses,
+          exams,
+          scheduleList,
+          query: req.query  // for optional messages
+        });
+      });
     });
   });
 };
+
+// Save new schedule
 exports.saveSchedule = (req, res) => {
   const { sdate, starttime, endtime, course_id, exam_id } = req.body;
-
-  // Convert to integers if needed
   const cid = parseInt(course_id);
   const ex_id = parseInt(exam_id);
 
-  // Optional: check
-  console.log("Controller values:", { sdate, starttime, endtime, cid, ex_id });
-
-  regmodel.saveSchedule(sdate, starttime, endtime, cid, ex_id, (err, result) => {
-    if (err) {
-      console.error("Failed to insert schedule:", err);
-      return res.status(500).send("Error saving schedule");
-    }
-
-    res.redirect("/Schedule");
+  regmodel.saveSchedule(sdate, starttime, endtime, cid, ex_id, (err) => {
+    if (err) return res.status(500).send("Failed to save schedule");
+    res.redirect("/schedule?msg=added");
   });
 };
+
+// Delete schedule
+exports.deleteSchedule = (req, res) => {
+  const { schid } = req.params;
+  regmodel.deleteSchedule(schid, (err) => {
+    if (err) return res.status(500).send("Failed to delete schedule");
+    res.redirect("/schedule?msg=deleted");
+  });
+};
+
+// Show update form
+exports.getUpdateScheduleForm = (req, res) => {
+  const { schid } = req.params;
+
+  regmodel.getScheduleById(schid, (err1, schedules) => {
+    if (err1 || schedules.length === 0) return res.status(500).send("Schedule not found");
+
+    regmodel.getAllCourses((err2, subjects) => {
+      if (err2) return res.status(500).send("Error loading courses");
+
+      regmodel.getAllExams((err3, exams) => {
+        if (err3) return res.status(500).send("Error loading exams");
+
+        res.render("updated_Schedule.ejs", {
+          schedule: schedules[0],
+          subjects,
+          exams
+        });
+      });
+    });
+  });
+};
+
+// Update schedule
+exports.updateSchedule = (req, res) => {
+  const { schid } = req.params;
+  const { date, starttime, endtime, cid, ex_id } = req.body;
+
+  regmodel.updateSchedule(date, starttime, endtime, cid, ex_id, schid, (err) => {
+    if (err) return res.status(500).send("Database error");
+    res.redirect("/schedule?msg=updated");
+  });
+};
+
+
+
+
+/*=========stud reg==================*/
+exports.AddStud=(req,res)=>{
+    res.render("Student_Registration.ejs");
+};
+
+exports.saveS = (req, res) => {
+  const { sname, semail, spassword, scontact } = req.body;
+
+  regmodel.saveStud({ sname, semail, spassword, scontact })
+    .then(() => {
+      res.render("Student_login");  
+    })
+    .catch((err) => {
+      console.error("Error inserting student:", err);
+      res.render("Student_login");  
+    });
+};
+
+//===============student login==============
+
+exports.StudLogin=(req,res)=>{
+    res.render("Student_login.ejs");
+};
+
+//===============display admin msg===============
+
+
+exports.admininfo = (req, res) => {
+  const aid = req.session.adminid; 
+
+  regmodel.getAdminById(aid, (err, adminData) => {
+    if (err) {
+      console.error("DB error:", err);
+      return res.send("Database error");
+    }
+
+    if (adminData) {  
+      console.log("Admin Data from DB:", adminData);  
+      res.render("ViewAdminData", { admin: adminData }); 
+    } else {
+      res.send("No admin found");
+    }
+  });
+};
+
+
+
+
+
+
+//===============student dashboard================
+exports.StudDash= (req,res)=>{
+  res.render("Student_Dashboard.ejs");
+}
+
+
+exports.validateStud = (req, res) => {
+  const { studentName, studentPassword } = req.body;
+
+  regmodel.ValidateStud(studentName, studentPassword)
+    .then((result) => {
+      if (result.length > 0) {
+        req.session.studentId = result[0].sid;
+        req.session.studentData = result[0];  // Save for later fetch
+
+        res.render("Student_Dashboard");  // Just show welcome message
+      } else {
+        res.render("Student_login", { msg: "Invalid credentials" });
+      }
+    })
+    .catch((err) => {
+      console.error("Student login error:", err);
+      res.render("error.ejs");
+    });
+};
+
+
+
+
+//=====================student details========================
+
+exports.StudentDetails = (req, res) => {
+  const student = req.session.studentData;
+
+  if (!student) {
+    return res.status(403).send("Unauthorized");
+  }
+
+  res.render("studentDetails", { student });
+};
+//==================student reg internal================
+
+exports.loadRegisterForm = async (req, res) => {
+  try {
+    const schedules = await service.getExamSchedules();
+    res.render('studentRegister', { schedules });
+  } catch (err) {
+    console.error("Error loading register form:", err);  // <-- this will show real error in console
+    res.status(500).send("Error loading form");
+  }
+};
+
+
+exports.saveStudent = async (req, res) => {
+  const data = req.body;
+  try {
+    await service.saveStudent(data);
+    res.send("Student Registered Successfully");
+  } catch (err) {
+    res.status(500).send("Error saving student");
+  }
+}

@@ -183,6 +183,7 @@ body, html {
 /* Sidebar */
 .side1 {
     width: 20%;
+    color: white;
     min-height:400px;
     background-color: #f0f4f8;
     height:500px;
@@ -211,7 +212,7 @@ body, html {
     min-height:500px;
     background-color: #dacaca;
     background-color: #f4bbfb;
-    height:500px;
+   
     background-color: teal;
     
     color: #fff;
@@ -233,8 +234,10 @@ body, html {
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 450px;
-  min-height: 250px;
+ min-height: 250px;
 }
+
+
 
 .course-form-container h2 {
   margin-bottom: 15px;
@@ -296,7 +299,11 @@ body, html {
   position: relative;
 }
 .viewcourse{
-  width:700px;
+  width:570px;
+}
+.viewcourse table{
+  margin: auto;
+  width: 95%;
 }
 
 /*=================-===========================exam css==================================================*/
@@ -308,7 +315,7 @@ body, html {
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 450px;
-  height: 430px;
+  height: 400px;
   margin-top: -80px;
 }
 
@@ -354,6 +361,14 @@ body, html {
   transition: background-color 0.3s ease;
 }
 
+ .toshowCourse {
+  display: flex;
+  gap: 20px;
+}
+.viewcourse {
+  flex: 1;
+  overflow-y: auto;  /* optional if needed */
+}
 .exam-form button:hover {
    background-color: #e0a800;
 }
@@ -559,3 +574,10 @@ body, html {
 .btn-primary:hover {
   background-color: #0056b3;
 } */
+
+.form-label{
+  font-weight:700 ;
+}
+
+
+/* ================= schedule css========================*/
