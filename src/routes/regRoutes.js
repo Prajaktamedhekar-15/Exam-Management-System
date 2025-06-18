@@ -15,8 +15,33 @@ router.get("/dashBoard", regCtrl.dashBoardPage);
 
 router.post("/validateAdminData",regCtrl.validateAd);
 
-router.get("/course",regCtrl.CourseReg);
-router.post("/addCourse",regCtrl.saveC);
+// router.get("/course",regCtrl.CourseReg);
+// router.post("/addCourse",regCtrl.saveC);
+
+
+router.get("/course", regCtrl.showCourse);
+router.post("/addCourse", regCtrl.saveC);
+router.get("/deleteById", regCtrl.deleteCourseById);
+
+//router.get("/exam",regCtrl.Stu_Exam);
+
+
+router.get("/exam", regCtrl.Stu_Exam);       
+router.post("/SaveExamData", regCtrl.save_Exam); 
+
+router.get("/UpdatedById", regCtrl.update_Exam);
+router.post("/updatedUserExam", regCtrl.up_exam);
+
+
+router.get('/question', regCtrl.Questionform);
+router.post('/saveQues', regCtrl.SaveQuestions);
+
+
+router.get("/schedule", regCtrl.scheduleForm);
+router.post("/saveSchedule", regCtrl.saveSchedule);
+router.get("/schedule/delete/:schid", regCtrl.deleteSchedule);
+router.get("/schedule/edit/:schid", regCtrl.getUpdateScheduleForm);
+router.post("/schedule/update/:schid", regCtrl.updateSchedule);
 
 
 
