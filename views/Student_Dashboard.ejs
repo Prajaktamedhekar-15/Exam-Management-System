@@ -19,7 +19,7 @@
                 <ul>
                     <li><a href="#" onclick="loadDetails()">Student Details</a></li>
                     <li><a href="#" onclick="loadRegister()">Student Register</a></li>
-                    <li><a href="#">Exam Form Details</a></li>
+                    <li><a href="/student/exam-details">exam  from Details</a></li>
                     <li><a href="#">Download MCQ PDF</a></li>
                     <li><a href="#">Question</a></li>
                     <li><a href="#">Schedule</a></li>
@@ -50,7 +50,15 @@
             document.getElementById("content").innerHTML = data;
         });
 }
-    
+/*function loadExamDetails() {
+  fetch('/student/exam-details')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("content").innerHTML = html; // ✅ fix selector
+    });
+}*/
+
+        
     
 
     

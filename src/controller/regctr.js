@@ -90,29 +90,6 @@ exports.deleteCourseById = (req, res) => {
     });
 };
 
-/*=========stud reg==================*/
-exports.AddStud=(req,res)=>{
-    res.render("Student_Registration.ejs");
-};
-
-exports.saveS = (req, res) => {
-  const { sname, semail, spassword, scontact } = req.body;
-
-  regmodel.saveStud({ sname, semail, spassword, scontact })
-    .then(() => {
-      res.render("Student_login");  
-    })
-    .catch((err) => {
-      console.error("Error inserting student:", err);
-      res.render("Student_login");  
-    });
-};
-
-//===============student login==============
-
-exports.StudLogin=(req,res)=>{
-    res.render("Student_login.ejs");
-};
 
 //===============display admin msg===============
 
@@ -140,66 +117,7 @@ exports.admininfo = (req, res) => {
 
 
 
-//===============student dashboard================
-exports.StudDash= (req,res)=>{
-  res.render("Student_Dashboard.ejs");
-}
 
-
-exports.validateStud = (req, res) => {
-  const { studentName, studentPassword } = req.body;
-
-  regmodel.ValidateStud(studentName, studentPassword)
-    .then((result) => {
-      if (result.length > 0) {
-        req.session.studentId = result[0].sid;
-        req.session.studentData = result[0];  // Save for later fetch
-
-        res.render("Student_Dashboard");  // Just show welcome message
-      } else {
-        res.render("Student_login", { msg: "Invalid credentials" });
-      }
-    })
-    .catch((err) => {
-      console.error("Student login error:", err);
-      res.render("error.ejs");
-    });
-};
-
-//=====================student details========================
-
-exports.StudentDetails = (req, res) => {
-  const student = req.session.studentData;
-
-  if (!student) {
-    return res.status(403).send("Unauthorized");
-  }
-
-  res.render("studentDetails", { student });
-};
-
-//==================student reg internal================
-
-exports.loadRegisterForm = async (req, res) => {
-  try {
-    const schedules = await service.getExamSchedules();
-    res.render('studentRegister', { schedules });
-  } catch (err) {
-    console.error("Error loading register form:", err);  // <-- this will show real error in console
-    res.status(500).send("Error loading form");
-  }
-};
-
-
-exports.saveStudent = async (req, res) => {
-  const data = req.body;
-  try {
-    await service.saveStudent(data);
-    res.send("Student Registered Successfully");
-  } catch (err) {
-    res.status(500).send("Error saving student");
-  }
-}
 
 exports.Stu_Exam = async (req, res) => {
   try {
@@ -326,3 +244,122 @@ exports.saveSchedule = (req, res) => {
     res.redirect("/Schedule");
   });
 };
+
+
+
+
+
+
+
+/*=========stud reg==================*/
+exports.AddStud=(req,res)=>{
+    res.render("Student_Registration.ejs");
+};
+
+exports.saveS = (req, res) => {
+  const { sname, semail, spassword, scontact } = req.body;
+
+  regmodel.saveStud({ sname, semail, spassword, scontact })
+    .then(() => {
+      res.render("Student_login");  
+    })
+    .catch((err) => {
+      console.error("Error inserting student:", err);
+      res.render("Student_login");  
+    });
+};
+
+//===============student login==============
+
+exports.StudLogin=(req,res)=>{
+    res.render("Student_login.ejs");
+};
+
+//===============student dashboard================
+exports.StudDash= (req,res)=>{
+  res.render("Student_Dashboard.ejs");
+}
+
+
+exports.validateStud = (req, res) => {
+  const { studentName, studentPassword } = req.body;
+
+  regmodel.ValidateStud(studentName, studentPassword)
+    .then((result) => {
+      if (result.length > 0) {
+        // ✅ Save logged-in student's ID in session
+        req.session.studentId = result[0].sid;
+
+        // ✅ Optional: store student full data for other use
+        req.session.studentData = result[0]; 
+
+        // ✅ Redirect or render dashboard
+        res.render("Student_Dashboard");  // You can also use res.redirect("/student/dashboard") if needed
+      } else {
+        res.render("Student_login", { msg: "Invalid credentials" });
+      }
+    })
+    .catch((err) => {
+      console.error("Student login error:", err);
+      res.render("error.ejs");
+    });
+};
+
+
+//=====================student details========================
+
+exports.StudentDetails = (req, res) => {
+  const student = req.session.studentData;
+
+  if (!student) {
+    return res.status(403).send("Unauthorized");
+  }
+
+  res.render("studentDetails", { student });
+};
+
+//==================student reg internal================
+
+exports.loadRegisterForm = async (req, res) => {
+  try {
+    const schedules = await service.getExamSchedules();
+    res.render('studentRegister', { schedules });
+  } catch (err) {
+    console.error("Error loading register form:", err);  // <-- this will show real error in console
+    res.status(500).send("Error loading form");
+  }
+};
+
+
+
+
+exports.saveStudent = async (req, res) => {
+  const data = req.body;
+  try {
+    await service.saveStudent(data);
+    res.send("Student Registered Successfully");
+  } catch (err) {
+    res.status(500).send("Error saving student");
+  }
+}
+
+
+//-----------------------------------------------student exam details---------------------------------
+// === Controller to fetch and display exam details after login ===
+exports.examDetailsPage = (req, res) => {
+  const studentId = req.session.studentId;
+
+  if (!studentId) {
+    return res.redirect("/studentlogin");  // Not logged in
+  }
+
+  regmodel.getStudentExamDetails(studentId)
+    .then((examData) => {
+      res.render("ExamDetails", { examData });  // your EJS file
+    })
+    .catch((err) => {
+      console.error("Exam data fetch error:", err);
+      res.render("error.ejs", { msg: "Failed to fetch exam details" });
+    });
+};
+

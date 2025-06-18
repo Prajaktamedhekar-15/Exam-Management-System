@@ -99,14 +99,14 @@
         <select name="schid" id="schid" class="reg-select" required>
           <option value="">Select Exam Schedule</option>
           <% schedules.forEach(sch => { %>
-            <option value="<%= sch.schid %>">
-              <%= sch.cname.toUpperCase() %> - <%= sch.exname.toUpperCase() %> 
-              (Date: <%= sch.date ? sch.date.toISOString().slice(0,10) : "N/A" %> | 
-              Time: <%= sch.starttime ? sch.starttime.slice(0,5) : "N/A" %> - 
-              <%= sch.endtime ? sch.endtime.slice(0,5) : "N/A" %>)
-            </option>
-          <% }) %>
-        </select>
+           <option value="<%= sch.schid %>">
+           <%= sch.cname.toUpperCase() %> - <%= sch.exname.toUpperCase() %>
+      (Date: <%= sch.date ? sch.date.toISOString().slice(0,10) : "N/A" %> |
+      Time: <%= sch.starttime ? sch.starttime.slice(0,5) : "N/A" %> -
+      <%= sch.endtime ? sch.endtime.slice(0,5) : "N/A" %>)
+           </option>
+        <% }) %>
+      </select>
       </div>
 
       <button type="submit" class="reg-button">Submit</button>

@@ -7,6 +7,7 @@ body, html {
   font-family: 'Roboto','Segoe UI', sans-serif;
   height: 100%;
   background-image: url("Home.jpg");
+  
 }
 
 .background {
@@ -16,6 +17,7 @@ body, html {
   align-items: center;
   justify-content: center;
   background-image: url("Home.jpg");
+
 }
 
 /* Card Style */

@@ -1,7 +1,7 @@
 const regmodel = require("../models/regmodel");
 
 const conn=require("../config/db");
-
+//==================student registration internal============
 exports.getExamSchedules = () => {
   return new Promise((resolve, reject) => {
     const q = `SELECT schid, cname, exname, date, starttime, endtime 
@@ -26,3 +26,6 @@ exports.saveStudent = (data) => {
     });
   });
 };
+
+
+

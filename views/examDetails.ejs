@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exam Details</title>
+  <style>
+    .exam-table {
+      width: 90%;
+      margin: 30px auto;
+      border-collapse: collapse;
+    }
+
+    .exam-table th, .exam-table td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .exam-table th {
+      background-color: #f2f2f2;
+    }
+
+    .start-btn {
+      padding: 6px 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .start-btn:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+<h2 style="text-align:center;">Student Exam Schedule</h2>
+
+<table class="exam-table">
+  <thead>
+    <tr>
+      <th>Student ID</th>
+      <th>Name</th>
+      <th>Course</th>
+      <th>Exam</th>
+      <th>Date</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Total Marks</th>
+      <th>Passing Marks</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% examData.forEach((data) => { %>
+      <tr>
+        <td><%= data.sid %></td>
+        <td><%= data.sname %></td>
+        <td><%= data.cname %></td>
+        <td><%= data.exname %></td>
+        <td><%= data.date.toISOString().slice(0, 10) %></td>
+        <td><%= data.starttime.slice(0, 5) %></td>
+        <td><%= data.endtime.slice(0, 5) %></td>
+        <td><%= data.totalmark %></td>
+        <td><%= data.passingmark %></td>
+        <td><button class="start-btn">Start Exam</button></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+</body>
+</html>

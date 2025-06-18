@@ -40,7 +40,7 @@ exports.saveCourse = (cname) => {
 /*=====================student reg================*/
 exports.saveStud = ({ sname, semail, spassword, scontact }) => {
   return new Promise((resolve, reject) => {
-    const query = "INSERT INTO student (sname, semail, spassword, scontact) VALUES (?, ?, ?, ?)";
+    const query = "INSERT INTO studentlogin (sname, semail, spassword, scontact) VALUES (?, ?, ?, ?)";
     conn.query(query, [sname, semail, spassword, scontact], (err, result) => {
       if (err) {
         console.error("Error inserting student:", err);
@@ -52,6 +52,10 @@ exports.saveStud = ({ sname, semail, spassword, scontact }) => {
   });
 };
 
+
+
+
+   
 //========================display admin data=================
 
 exports.getAdminById = (aid, callback) => {
@@ -71,7 +75,7 @@ exports.getAdminById = (aid, callback) => {
 
 exports.ValidateStud = (sname, spassword) => {
   return new Promise((resolve, reject) => {
-    const sql = "SELECT * FROM student WHERE sname = ? AND spassword = ?";
+    const sql = "SELECT * FROM studentlogin WHERE sname = ? AND spassword = ?";
     conn.query(sql, [sname, spassword], (err, result) => {
       if (err) {
         return reject(err);
@@ -194,3 +198,31 @@ exports.saveSchedule = (sdate, starttime, endtime, cid, ex_id, callback) => {
   
   conn.query(sql, [sdate, starttime, endtime, cid, ex_id], callback);
 };
+
+
+
+//-----------------------------student exam details---------------------------------
+
+// === Get exam schedule for a logged-in student by student ID ===
+exports.getStudentExamDetails = (studentId) => {
+  return new Promise((resolve, reject) => {
+    const sql = `
+      SELECT s.sid, s.sname, c.cname, e.exname, sch.date, sch.starttime, sch.endtime, 
+             e.totalmark, e.passingmark
+      FROM student s
+      JOIN schedule sch ON s.schid = sch.schid
+      JOIN course c ON sch.cid = c.cid
+      JOIN exam e ON sch.ex_id = e.ex_id
+      WHERE s.sid = ?`;
+
+    conn.query(sql, [studentId], (err, result) => {
+      if (err) {
+        console.error("Error fetching exam schedule:", err);
+        reject("Error fetching exam schedule");
+      } else {
+        resolve(result);
+      }
+    });
+  });
+};
+
